@@ -1,0 +1,12 @@
+[package]
+name = "debt_tracker_api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = "4.9.0"
+mongodb = "3.1.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1"
+futures = "0.3"
+chrono = { version = "0.4.39", features = ["serde"] }
