@@ -3,7 +3,7 @@ use std::str::FromStr;
 use actix_web::{delete, get, post, put, web, HttpResponse};
 use futures::TryStreamExt;
 use mongodb::{
-    bson::{doc, oid::ObjectId, DateTime},
+    bson::{self, doc, oid::ObjectId, DateTime},
     Client,
 };
 use serde::Serialize;
@@ -152,5 +152,22 @@ async fn update_debt(
     id: web::Path<String>,
     form: web::Json<Debt>,
 ) -> HttpResponse {
-    todo!();
+    let mut req = form.into_inner();
+    let oid: ObjectId = match ObjectId::from_str(&id) {
+        Ok(id) => id,
+        Err(_) => return HttpResponse::BadRequest().body("Invalid ID."),
+    };
+    req.updated_at = Some(DateTime::now());
+
+    let coll: mongodb::Collection<Debt> = client.database(DB_NAME).collection(COLLECTION_NAME);
+
+    let filter = doc! {"_id": oid};
+    let update = doc! {"$set": bson::to_document(&req).expect("naah")};
+
+    match coll.update_one(filter, update).await {
+        Ok(_) => HttpResponse::Ok().body("updated"),
+        Err(err) => HttpResponse::InternalServerError()
+            .content_type("application/json")
+            .body(format!("{{\"error\": \"{}\"}}", err)),
+    }
 }
