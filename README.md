@@ -11,7 +11,7 @@ This API allows you to create, read, update and delete debts.
 ### Create a debt
 
 ```
-POST /debts
+POST /add
 ```
 
 #### Request body
@@ -20,6 +20,17 @@ POST /debts
 {
   "name": "John Doe",
   "amount": 100.0,
+}
+```
+
+#### Response body
+```json
+{
+    _id: String,
+    name: String,
+    amount: isize,
+    createdAt: String,
+    updatedAt: String,
 }
 ```
 
