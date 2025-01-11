@@ -26,11 +26,11 @@ POST /add
 #### Response body
 ```json
 {
-    _id: String,
-    name: String,
-    amount: isize,
-    createdAt: String,
-    updatedAt: String,
+    "_id": "$oid",
+    "name": "String",
+    "amount": isize,
+    "createdAt": "DateTime",
+    "updatedAt": "DateTime",
 }
 ```
 
