@@ -28,7 +28,7 @@ POST /add
 {
     "_id": "$oid",
     "name": "String",
-    "amount": isize,
+    "amount": "isize",
     "createdAt": "DateTime",
     "updatedAt": "DateTime",
 }
