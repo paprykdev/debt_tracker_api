@@ -34,4 +34,21 @@ POST /add
 }
 ```
 
+### Get all debts
 
+```
+GET /
+```
+
+#### Response body
+```json
+[
+    {
+        "_id": "$oid",
+        "name": "String",
+        "amount": "isize",
+        "createdAt": "DateTime",
+        "updatedAt": "DateTime",
+    }
+]
+```
